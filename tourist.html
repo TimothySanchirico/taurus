@@ -18,31 +18,6 @@
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<header id="header">
-					<h1 id="logo"><a href="index.html">TourUs <span>>_Crowdsourcing a smaller world</span></a></h1>
-					<nav id="nav">
-						<ul>
-							<li class="current"><a href="index.html">Welcome</a></li>
-							<li class="submenu">
-								<a href="404.html">Menu</a>
-								<ul>
-									<li><a href="past-projects.html">Past Projects</a></li>
-									<li><a href="staff.html">Staff</a></li>
-									<!-- <li class="submenu">
-										<a href="#">More...</a>
-										<ul> -->
-											<li><a href="https://www.youtube.com/channel/UC0knTGsP-0BxFAzG_o0NrJA">YouTube</a></li>
-											<li><a href="follow.html">Following Along</a></li>
-											<li><a href="helping.html">Helping</a></li>
-											<li><a href="contact.html">Contact</a></li>
-										<!-- </ul>
-									</li> -->
-								</ul>
-							</li>
-							<li><a href="404.html" class="button special">Sign In</a></li>
-						</ul>
-					</nav>
-				</header>
 
 			<!-- Main -->
 				<article id="main">
@@ -59,15 +34,20 @@
 							<!-- Content -->
 								<div class="content">
 									<section>
+									<form id = "tourguide form" class = "guide_form">
+										<input required type ="text" name = "tourist_first" id = "tourist_first" class = "user_name" placeholder = "First name" size = "1">
+										<input required type ="text" name = "tourist_last" id = "tourist_last" class = "user_name" placeholder = "Last name" size = "1">
 
-										<header>
-											<h3>Here's what you can do</h3>
-										</header>
-										<p>While this is a college course based at the University of Illinois at Urbana-Champaign, there are a lot of resources at those looking in from the outside. This includes our YouTube which includes our microlectures, and more. That's not a bad place to start. You can check it out <a href = "https://www.youtube.com/channel/UC0knTGsP-0BxFAzG_o0NrJA">here</a>.</p>
-										<p>But wait, there's more! This class extends far past the classroom. While the University may host resources to help students, you can always do projects on your own. Grab a few buddies, come up with an idea, and adventure onward! </p>
-										<p>There is way too much out there in the world to be curious about. Don't just sit there, get up and make a change! Don't be afraid to dream big, godspeed!</p>
-										<p>Also, don't be afraid to shoot us an email ;)</p>
-										<a href="404.html" class="image featured" id = "followhd"><img src="images/light.jpg" alt="" /></a>
+										<input required type ="text" name = "tourist dest" id = "guide_dest" class = "destinations" placeholder = "Cities you'd like to tour">
+
+										<textarea required type = "text" name = "tourist interest" class = "user_interest" rows = "5" placeholder = "List your interests"></textarea>
+										<div class = "submit_wrapper">
+										<input type = "submit" value = "submit">
+										</div>
+
+									</form>
+
+										
 									</section>
 								</div>
 
