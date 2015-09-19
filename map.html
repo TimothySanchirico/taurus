@@ -3,7 +3,7 @@
 	html5up.net | @n33co
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<template name = "map">
+<template name = "destination_map">
 	<head>
 		<title>Map</title>
 		<meta charset="utf-8" />
@@ -39,7 +39,9 @@
 								<div class="content">
 									<section>
 										<h2 id = "nopad">Destinations</h2>
-										<div id="map"></div>
+										<div id="map_container">
+											{{> googleMap name="destination_map" options=mapOptions}}
+										</div>
 										
 									</section>
 								</div>

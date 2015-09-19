@@ -9,7 +9,7 @@ Router.route('/tourist', {
   template: 'touristSignUp'
 });
 Router.route('/map', {
-  template: 'mapTemplate'
+  template: 'destination_map'
 });
 
 //setup mongoDBs
@@ -18,10 +18,13 @@ guide_collection = new Mongo.Collection("guides");
 
 
 if (Meteor.isClient) {
-  console.log("Debug Line 21")
   // counter starts at 0
   Meteor.subscribe('tourists');
   Meteor.subscribe('guides');
+
+  Meteor.startup(function(){
+    GoogleMaps.load();
+  });
   
   Template.tourguideSignUp.events({
     'submit .guide_form': function (event) {
@@ -83,6 +86,19 @@ if (Meteor.isClient) {
 
     }
   });
+
+  Template.destination_map.helpers({
+    mapOptions: function(){
+      if (GoogleMaps.loaded()) {
+      return {
+        center: new google.maps.LatLng(38.6272, -90.1978),
+        zoom: 8,
+        disableDefaultUI:true
+      };
+    }
+    }
+  });
+
 }
 
 if (Meteor.isServer) {
