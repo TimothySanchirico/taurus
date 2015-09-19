@@ -54,7 +54,19 @@
 		background-size: 100%;
 		background-image: url("http://streetwill.co/uploads/post/photo/441/show_rrpDtkqVJRIZhIWdJnmElDtle4hFEWDIsFd94izwr4c.jpg");
 	}
+	#destqs {
+		text-align: center;
+		padding-bottom: 10px;
 
+	}
+	#ours {
+		color: black;
+		padding: 3em;
+		background-color: rgba(200,235,255,0.6);
+	}
+	#thisis {
+		background-color: rgba(255,255,255,0.85);
+	}
 
 
 
@@ -1802,8 +1814,11 @@
 		width: 100%;
 	}
 	#destination_add {
-		width:45%;
+		width:80%;
 		margin-bottom: 15px;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: rgba(255,255,255,0.85);
 	}
 
 		input[type="text"]:focus,
@@ -2207,9 +2222,9 @@
 		}
 
 		.wrapper.style4 {
-			background: #fff;
+			background-image: url("http://streetwill.co/uploads/post/photo/216/show_oV7IKl3B7QLoPK42bprAXroMC_669VE9-c7EM4ONCvc.jpg");
 			color: inherit;
-			padding: 4em;
+			padding: 6em;
 		}
 
 /* Header */
