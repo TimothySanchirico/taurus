@@ -20,6 +20,44 @@
 		text-align: center;
 	}
 
+	.localpics {
+		/*background-image: url("http://streetwill.co/uploads/post/photo/426/show_zScut1IwFME7Lqo_x1SGHvyOhTuHzxNzUX-h0K_S3FU.jpg");*/
+		width: 420px;
+				height: 236px;
+	}
+
+	#localphoto1 {
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-image: url("http://streetwill.co/uploads/post/photo/429/show_vdBUkn2drgCpYUe_xkogM_YqaMIgN7n3hZtVxpw59ko.jpg");
+	}
+
+	#localphoto2 {
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-image: url("http://streetwill.co/uploads/post/photo/321/show_LprO0kQA3PhXpIFvKhoNRTqiTA9iOTuC8Nybi2d8wCo.jpg");
+	}
+
+	#localphoto3 {
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-image: url("http://streetwill.co/uploads/post/photo/345/show_wruIy4jXHOHMUpxJrv2vivN9JZUWwchJ0_MIuUqmu10.jpg");
+	}
+
+	#localphoto4 {
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-image: url("http://streetwill.co/uploads/post/photo/465/show_6KfyHWAyk2O9CgdzECaeI3R-7mo2NMBpGCUNYHr6JsA.jpg");
+	}
+	#localphoto5 {
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-image: url("http://streetwill.co/uploads/post/photo/441/show_rrpDtkqVJRIZhIWdJnmElDtle4hFEWDIsFd94izwr4c.jpg");
+	}
+
+
+
+
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
@@ -2425,10 +2463,7 @@
 	#banner {
 		background-attachment: scroll, scroll, scroll, fixed;
 		background-color: #645862;
-		background-image: url("../public/images/arch2.jpg");
-		-webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+		background-image: url("http://carpetcleaningstlouismo.today/wp-content/uploads/2015/02/st-louis-arch.jpg?nxsv=3.0.141229.0938");
   background-size: cover;
 		background-repeat: no-repeat;
 		color: rgb(150,150,255);
@@ -2531,7 +2566,7 @@
 
 	#cta {
 		background-attachment: scroll, scroll, scroll, fixed;
-		background-image: url("../../images/yosemite.jpg");
+		background-image: url("http://streetwill.co/uploads/post/photo/471/show_uEqY2R7cYdUPMMZ1djBVs5w_dJGXk8AoPSBRQs7j08Y.JPG");
 		/*background-position: top left, top right, top left, bottom center;*/
 		/*background-repeat: no-repeat, no-repeat, repeat, no-repeat;*/
 		background-size: cover;

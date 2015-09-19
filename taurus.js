@@ -8,10 +8,13 @@ Router.route('/guide', {
 Router.route('/tourist', {
   template: 'touristSignUp'
 });
+Router.route('/map', {
+  template: 'mapTemplate'
+});
 
 //setup mongoDBs
-tourist_db = new Mongo.Collection('tourists');
-guide_db = new Mongo.Collection('guides');
+tourist_collection = new Mongo.Collection('tourists');
+guide_collection = new Mongo.Collection('guides');
 
 
 if (Meteor.isClient) {
