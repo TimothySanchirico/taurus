@@ -11,6 +11,9 @@ Router.route('/tourist', {
 Router.route('/map', {
   template: 'destination_map'
 });
+Router.route('/set_dest', {
+  template: "destination_setter"
+});
 
 //setup mongoDBs
 tourist_collection = new Mongo.Collection("tourists");
@@ -18,14 +21,16 @@ guide_collection = new Mongo.Collection("guides");
 
 
 if (Meteor.isClient) {
-  // counter starts at 0
+  
   Meteor.subscribe('tourists');
   Meteor.subscribe('guides');
 
   Meteor.startup(function(){
     GoogleMaps.load();
   });
-  
+
+  Markers = new Mongo.Collection("map_markers");
+
   Template.tourguideSignUp.events({
     'submit .guide_form': function (event) {
       event.preventDefault();
@@ -90,16 +95,39 @@ if (Meteor.isClient) {
   Template.destination_map.helpers({
     mapOptions: function(){
       if (GoogleMaps.loaded()) {
-      return {
-        center: new google.maps.LatLng(38.6272, -90.1978),
-        zoom: 8,
-        disableDefaultUI:true
-      };
-    }
+        return {
+          center: new google.maps.LatLng(38.6272, -90.1978),
+          zoom: 8,
+          disableDefaultUI:true
+        };
+      }
     }
   });
+  Template.destination_map.onCreated(function(){
+    GoogleMaps.ready('destination_map', function(map) {
+      google.maps.event.addListener(map.instance, 'click', function(event) {
+        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+      });
+      var markers = {};
 
+      Markers.find().observe({  
+        added: function(document) {
+          // Create a marker for this document
+          var marker = new google.maps.Marker({
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(document.lat, document.lng),
+            map: map.instance,
+            // We store the document _id on the marker in order 
+            // to update the document within the 'dragend' event below.
+            id: document._id
+          });
+        }
+      });
+    });
+  });
 }
+
 
 if (Meteor.isServer) {
   //@TODO need to set up publishing ie turn off autopublish
