@@ -35,6 +35,20 @@ if (Meteor.isClient) {
       var interests = event.target.guide_interest.value;
 
       //push these into the guide database
+      //alert(locations + " " + interests);
+      var touristguide_locations_array = locations.split(",");
+      var touristguide_interests_array = interests.split(",");
+      guide_db.insert({
+          name: { first: event.target.guide_first.value, last: event.target.guide_last.value },
+          touristguide_locations: touristguide_locations_array,
+          touristguide_interests_array: touristguide_interests_array,
+          createdAt: new Date()
+        });
+
+      event.target.guide_first.value = "";
+      event.target.guide_last.value = "";
+      event.target.guide_dest.value = "";
+      event.target.guide_interest.value = "";
       
     }
   });
@@ -49,8 +63,20 @@ if (Meteor.isClient) {
       //@TODO parse locations and interests into arrays of individual locations / interests
       var locations = event.target.tourist_dest.value;
       var interests = event.target.tourist_interest.value;
-
+      var tourist_locations_array = locations.split(",");
+      var tourist_interests_array = interests.split(",");
       //push these into the tourist database
+      tourist_db.insert({
+          name: { first: event.target.tourist_first.value, last: event.target.tourist_last.value },
+          tourist_locations: tourist_locations_array,
+          tourist_interests_array: tourist_interests_array,
+          createdAt: new Date()
+        });
+
+      event.target.tourist_first.value = "";
+      event.target.tourist_last.value = "";
+      event.target.tourist_dest.value = "";
+      event.target.tourist_interest.value = "";
 
     }
   });
