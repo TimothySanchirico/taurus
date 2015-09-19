@@ -1,34 +1,36 @@
-
 <!--
 	Twenty by HTML5 UP
 	html5up.net | @n33co
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<template name = "touristSignUp">
+<template name = "map">
 	<head>
-		<title>Following Along</title>
+		<title>Map</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
 	</head>
 	<body class="no-sidebar">
 		<div id="page-wrapper">
+
 			<!-- Header -->
-			<header id="header">
-					<h1 id="logo"><a href="/">TourUs <span>>_Crowdsourcing a smaller world</span></a></h1>
-			</header>
+				<header id="header">
+					<h1 id="logo"><a href="index.html">TourUs <span>>_Crowdsourcing a smaller world</span></a></h1>
+					
+				</header>
 
 			<!-- Main -->
 				<article id="main">
 					<div id = "mybg">
-					
-					<header class="special container">
+
+					<!-- <header class="special container">
 						<h2>I see you're looking to travel! <strong>Where are you headed? :D</strong></h2>
 						<p>Let's write a new chapter together.</p>
-					</header>
+					</header> -->
 
 					<!-- One -->
 						<section class="wrapper style4 container">
@@ -36,27 +38,17 @@
 							<!-- Content -->
 								<div class="content">
 									<section>
-									<form id = "tourguide form" class = "tourist_form">
-										<input required type ="text" name = "tourist_first" id = "tourist_first" class = "user_name" placeholder = "First name" size = "1">
-										<input required type ="text" name = "tourist_last" id = "tourist_last" class = "user_name" placeholder = "Last name" size = "1">
-
-										<input required type ="text" name = "tourist_dest" id = "guide_dest" class = "destinations" placeholder = "Cities you'd like to tour">
-
-										<textarea required type = "text" name = "tourist_interest" class = "user_interest" rows = "5" placeholder = "List your interests"></textarea>
-										<div class = "submit_wrapper">
-										<input type = "submit" value = "submit">
-										</div>
-
-									</form>
-
+										<h2 id = "nopad">Destinations</h2>
+										<div id="map"></div>
 										
 									</section>
 								</div>
 
 						</section>
 					</div>
-
 				</article>
+
+
 
 
 		</div>
@@ -70,7 +62,20 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script src = "js/map.js"></script>
+
+			// <script>
+		 //      function initialize() {
+		 //        var mapCanvas = document.getElementById('map');
+		 //        var mapOptions = {
+		 //          center: new google.maps.LatLng(44.5403, -78.5463),
+		 //          zoom: 8,
+		 //          mapTypeId: google.maps.MapTypeId.ROADMAP
+		 //        }
+		 //        var map = new google.maps.Map(mapCanvas, mapOptions)
+		 //      }
+		 //      google.maps.event.addDomListener(window, 'load', initialize);
+		 //    </script>
 
 	</body>
-
 </template>
