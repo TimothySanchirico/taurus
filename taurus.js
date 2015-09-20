@@ -22,6 +22,9 @@ Router.route('/matches', {
 Router.route('/output', {
   template: "output"
 });
+Router.route('/choose', {
+  template: "choose"
+});
 
     tourist_collection = new Mongo.Collection("tourists");
     guide_collection = new Mongo.Collection('guides');
@@ -58,8 +61,13 @@ if (Meteor.isClient) {
     });
     
   });
-
-  
+  Template.choose.events({
+    'click .to_output':function(event){
+      event.preventDefault();
+      Router.go('/output');
+    }
+  });
+ 
 
   Template.tourguideSignUp.events({
     'submit .guide_form': function (event) {
