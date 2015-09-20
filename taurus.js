@@ -71,7 +71,7 @@ if (Meteor.isClient) {
             console.log("insert success");
           }
         });
-      var id = Meteor.default_connection._lastSessionId;
+      var id = guide_collection.find().fetch()[0]._id;
       Session.set('this_session', id);
       Session.set('type', "guide");
       event.target.guide_first.value = "";
@@ -103,7 +103,7 @@ if (Meteor.isClient) {
           createdAt: new Date()
         });
 
-      var id = Meteor.default_connection._lastSessionId;
+      var id = tourist_collection.find().fetch()[0]._id;
       Session.set('this_session', id);
       Session.set('type', "tourist");
       event.target.tourist_first.value = "";
