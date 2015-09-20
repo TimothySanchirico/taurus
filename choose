@@ -1,28 +1,4 @@
-
-<!--
-	<head>
-  <title>Todo List</title>
-</head>
- 
-<body>
-  <div class="container">
-    <header>
-      <h1>Todo List</h1>
-    </header>
- 
-    <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
-    </ul>
-  </div>
-</body>
- 
-<template name="task">
-  <li>{{text}}</li>
-</template>
--->
-<template name = "matches">
+<template name = "chooses">
 	<head>
 		<title>Following Along</title>
 		<meta charset="utf-8" />
@@ -90,16 +66,3 @@
 <template name="ranking">
 	<li><a href = "#">{{text}}</a></li>
 </template>
-
-<!-- <template name="task">
-  <li>{{text}}</li>
-</template> -->
-
-
-
-
-
-
-
-
-

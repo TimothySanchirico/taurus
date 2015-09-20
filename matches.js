@@ -1,13 +1,27 @@
 
 if (Meteor.isClient) {
   // This code only runs on the client
-  Template.matches.helpers({
-    tasks: function () {
-      return rankGuides(Session.get('this_session'));
+  Template.ranking.helpers({
+    rankings: function () {
+      return formatting(rankGuides(Session.get('this_session')));
+
+      // guide_collection.find({_id: rankGuides[0][0]}).fetch()[0].name.first;
+
       //return guide_collection.find({});
     }
   });
 }
+
+function formatting(arr ) {
+	for(var i = 0; i < rankGuides.length; i++) {
+		var guide = guide_collection.find({_id: rankGuides[i][0]}).fetch()[0];
+		var namer = guide.name.first + " " + guide.name.last;
+		var scorer = stringify(rankGuides[i][1]);
+		var sum = namer.concat("\t\t-\t\t" + scorer);
+	}
+
+}
+
 
 function rankGuides(sessionval) {
 	console.log(guide_collection.find().count());
@@ -15,7 +29,7 @@ function rankGuides(sessionval) {
 	console.log(sessionval);
 	var guideCursor = guide_collection.find();
 	var tourist = tourist_collection.find({_id: sessionval}).fetch()[0];
-	console.log(tourist.name);
+	// console.log(tourist.name);
 	var rankings = new Array(0);
 	guideCursor.forEach(function(guide) {
 		var score = 0;
