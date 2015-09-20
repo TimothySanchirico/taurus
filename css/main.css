@@ -88,22 +88,25 @@
 	}
 
 	.half {
-		display: inline-block;
+		display: inline-table;
 	}
 	#left {
 		width: 49.4%;
-		height: 100vh;
+		/*height: 100vh;*/
 	}
-	#divider {
-		width: .2%;
-		height: 100vh;
-		background-color: black;
+	#propic {
+		width: 90%;
+		margin-right: auto;
+		margin-left: auto;
+
 	}
 	#right {
 		width: 49.4%;
-		height: 100vh;
+		/*height: 100vh;*/
 	}
-
+	.biggie {
+		font-size: 45px;
+	}
 
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
@@ -2304,7 +2307,11 @@
 			color: inherit;
 			padding: 6em;
 		}
-
+		.wrapper.style8 {
+			background-image: url("http://streetwill.co/uploads/post/photo/316/show_VF-uf-a1wWoGV1Kay8ntIZdMTIRpp_4VLRsMpswUMQU.jpg");
+			color: inherit;
+			padding: 6em;
+		}
 
 /* Header */
 

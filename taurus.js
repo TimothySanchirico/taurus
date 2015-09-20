@@ -19,6 +19,9 @@ Router.route('/set_dest', {
 Router.route('/matches', {
   template: "matches"
 });
+Router.route('/output', {
+  template: "output"
+});
 
     tourist_collection = new Mongo.Collection("tourists");
     guide_collection = new Mongo.Collection('guides');
