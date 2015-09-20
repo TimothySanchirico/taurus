@@ -45,6 +45,7 @@ if (Meteor.isClient) {
 
       //grab the form data
       var name = event.target.guide_first.value + ' ' + event.target.guide_last.value;
+      tour_guide_name = name;
 
       //@TODO: parse locations and interests into arrays of individual locations / interests
       var locations = event.target.guide_dest.value;
@@ -65,6 +66,7 @@ if (Meteor.isClient) {
       event.target.guide_last.value = "";
       event.target.guide_dest.value = "";
       event.target.guide_interest.value = "";
+      Session.set('guide_name', name);
 
     }
   });
@@ -94,7 +96,7 @@ if (Meteor.isClient) {
       event.target.tourist_dest.value = "";
       event.target.tourist_interest.value = "";
 
-      Session.set('name', name);
+      Session.set('tourist_name', name);
 
     }
   });
@@ -119,11 +121,13 @@ if (Meteor.isClient) {
             lat = result.geometry.location.H;
             lng = result.geometry.location.L;
             //THIS IS THE MARKER THAT NEEDS TO GO IN MARKERS DB
+            tour_guide_name = Session.get('guide_name');
+            console.log(tour_guide_name);
             var marker = new google.maps.Marker({
               position: new google.maps.LatLng(lat, lng),
               map: dest_map,
               title: "Destinationz"
-            })
+            });
             $('#destination_add').val('');
           });
       }
