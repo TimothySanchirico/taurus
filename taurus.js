@@ -31,17 +31,24 @@ if (Meteor.isClient) {
   Meteor.startup(function(){
     Meteor.subscribe('tourists');
     Meteor.subscribe('guides');
+    Meteor.subscribe('map_markers');
     guide_collection.allow({
-    'insert':function(){
+      'insert':function(){
       return true;
-    } 
-  });
+      } 
+    });
     tourist_collection.allow({
       'insert':function()
       {
         return true;
       }
     });
+    Markers.allow({
+      'insert':function(){
+        return true;
+      }
+    });
+
     GoogleMaps.load({
       key: 'AIzaSyAHtGRa7hABkvM7povLtOTXgxyantNO7-o',
       libraries: 'places'
@@ -63,7 +70,8 @@ if (Meteor.isClient) {
       //alert(locations + " " + interests);
       var guideLocArr = formatString(locations);
       var guideIntArr = formatString(interests);
-      var insert_obj = {name:guide_name, guideLoc: guideLocArr, guideInt:guideIntArr, createdAt:new Date()};
+      var guide_phone = event.target.guide_contact.value;
+      var insert_obj = {name:guide_name, guideLoc: guideLocArr, guideInt:guideIntArr, phone:guide_phone, createdAt:new Date()};
       console.log(insert_obj);
       guide_collection.insert(insert_obj, function(error){
           if(error){
@@ -140,6 +148,14 @@ if (Meteor.isClient) {
               map: dest_map,
               title: "Destinationz"
             });
+            Marker.insert(marker, function(error){
+              if(error){
+                console.log(error);
+              }
+              else {
+                console.log("Markers insert success");
+              }
+            });
             $('#destination_add').val('');
           });
       }
@@ -214,16 +230,26 @@ if (Meteor.isServer) {
     Meteor.publish('guides', function() {
       return guide_collection.find();
     });
-    guide_collection.allow({
-    'insert':function(){
-      return true;
-    }
-    
-  });
+    Meteor.publish('map_markers', function(){
+      return Markers.find();
+    });
 
-        tourist_collection.allow({
+    guide_collection.allow({
+      'insert':function(){
+        return true;
+      }
+    
+    });
+
+    tourist_collection.allow({
       'insert':function()
       {
+        return true;
+      }
+    });
+
+    Markers.allow({
+      'insert':function(){
         return true;
       }
     });

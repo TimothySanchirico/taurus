@@ -1819,6 +1819,7 @@
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+	input[type="tel"],
 	textarea {
 		-moz-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		-webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
@@ -1876,6 +1877,12 @@
 		display: inline-block;
 		width:49%;
 
+	}
+	#guide_phone {
+		margin-right: auto;
+		margin-left: auto;
+		width: 80%;
+		margin-bottom: 15px;
 	}
 
 
