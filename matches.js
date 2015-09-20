@@ -4,25 +4,30 @@ if (Meteor.isClient) {
   Template.matches.helpers({
     tasks: function () {
       return rankGuides(Session.get('this_session'));
+      //return guide_collection.find({});
     }
   });
 }
 
 function rankGuides(sessionval) {
+	console.log(guide_collection.find().count());
+	console.log(tourist_collection.find().count());
 	console.log(sessionval);
 	var guideCursor = guide_collection.find();
 	var tourist = tourist_collection.find({_id: sessionval}).fetch()[0];
+	console.log(tourist.name);
 	var rankings = new Array(0);
 	guideCursor.forEach(function(guide) {
 		var score = 0;
 		var sameLoc = 0;
 		for(var i=0; i<tourist.touristLoc.length; i++) {
 			for(var j=0; j<guide.guideLoc.length; j++) {
-				if(tourist.touristLoc[i] == guide.guideLoc[j])
-					sameLoc = 1;
+				if(tourist.touristLoc[i] == guide.guideLoc[j]) {
+					sameLoc++;
+				}
 			}
 		}
-		if(sameLoc != 1) {
+		if(sameLoc == 0) {
 			var entry = new Array(2);
 			entry[0] = guide._id;
 			entry[1] = score;
@@ -45,7 +50,7 @@ function rankGuides(sessionval) {
 	rankings.sort(sortFunction);
 	for(var i=0; i<rankings.length; i++)
 	{
-		console.log(rankings[i][0] + "\t" + rankings[i][1]);
+		console.log(guide_collection.find({_id: rankings[i][0]}).fetch()[0].name.first + "\t" + rankings[i][1]);
 	}
 	return rankings;
 }
