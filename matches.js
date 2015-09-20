@@ -2,24 +2,26 @@
 if (Meteor.isClient) {
   // This code only runs on the client
   Template.ranking.helpers({
-    rankings: function () {
-      return formatting(rankGuides(Session.get('this_session')));
-
-      // guide_collection.find({_id: rankGuides[0][0]}).fetch()[0].name.first;
-
-      //return guide_collection.find({});
+    'rankings': function () {
+	    return formatter(rankGuides(Session.get('this_session')));
     }
   });
 }
 
-function formatting(arr ) {
-	for(var i = 0; i < rankGuides.length; i++) {
-		var guide = guide_collection.find({_id: rankGuides[i][0]}).fetch()[0];
-		var namer = guide.name.first + " " + guide.name.last;
-		var scorer = stringify(rankGuides[i][1]);
-		var sum = namer.concat("\t\t-\t\t" + scorer);
+function formatter(twodarr) {
+	var out = new Array(0);
+	for(var i=0; i<twodarr.length; i++) {
+		out.push(subformatter(twodarr[i][0], twodarr[i][1]));
 	}
+	return out;
+}
 
+function subformatter(sessionval, score)
+{
+	var guide = guide_collection.find({_id: sessionval}).fetch()[0];
+	var name = guide.name.first + " " + guide.name.last;
+	var out = name + "\t\t\t" + score;
+	return out;
 }
 
 
@@ -74,6 +76,6 @@ function sortFunction(a, b) {
 		return 0;
 	}
 	else {
-		return (a[0] < b[0]) ? -1 : 1;
+		return (a[1] < b[1]) ? 1 : -1;
 	}
 }

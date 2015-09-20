@@ -59,11 +59,7 @@
 							<!-- Tourguide -->
 								<div class = "half" id = "right">
 									<h1 class = "biggie"><strong>Tour Guides</strong></h1>
-									<ul id = "guide_list">
-								      {{#each rankings}}
-									        {{> ranking}}
-								      {{/each}}
-								    </ul>
+										{{> ranking}}
 								</div>
 
 						</section>
@@ -88,7 +84,13 @@
 </template>
 
 <template name="ranking">
-	<li><a href = "#">{{text}}</a></li>
+	<ol>
+		{{#each potato}}
+<a  href = {{this}}>
+{{/each}}
+		{{#each rankings}}
+			<li>{{this}}</li> </a>{{/each}}
+	</ol>
 </template>
 
 <!-- <template name="task">

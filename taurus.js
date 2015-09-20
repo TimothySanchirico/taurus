@@ -282,7 +282,7 @@ function formatString(str) {
 function formatPhone(str) {
   var stripped = str.replace(/\D/g, "");
   var formatted = stripped.match(/^(\d{3})(\d{3})(\d{4})$/);
-  return (!formatted) ? null : "(" + m[1] + ") " + m[2] + "-" + m[3];
+  return (!formatted) ? null : "(" + formatted[1] + ") " + formatted[2] + "-" + formatted[3];
 }
 
 if (Meteor.isServer) {
