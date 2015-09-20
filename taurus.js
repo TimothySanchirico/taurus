@@ -25,6 +25,9 @@ Router.route('/output', {
 Router.route('/choose', {
   template: "choose"
 });
+Router.route('/thanks', {
+  template: "thanks"
+});
 
     tourist_collection = new Mongo.Collection("tourists");
     guide_collection = new Mongo.Collection('guides');
@@ -252,7 +255,7 @@ Template.output_map.onCreated(function(){
       console.log(guide_collection.find({_id: id}).fetch());
       //^get retrusnt the document with the id
       guide_collection.update({_id: id}, {$set :{markers: marker_array} }, {upsert: false, multi:false});
-
+      Router.go('/thanks');
       // Markers.insert(marker_array, function(error){
       //   if(error){
       //     console.log(error);

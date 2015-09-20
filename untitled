@@ -22,7 +22,7 @@
   <li>{{text}}</li>
 </template>
 -->
-<template name = "matches">
+<template name = "thanks">
 	<head>
 		<title>Following Along</title>
 		<meta charset="utf-8" />
@@ -49,23 +49,11 @@
 					</header>
 
 					<!-- One -->
-						<section class="wrapper style4 container">
+						<section class="wrapper style6 container">
 
 							<!-- Tourists -->
-								<div class = "half" id="left">
-									<h1 class = "biggie"><strong>Your Profile</strong></h1>
-									
-								</div>
-							<!-- Tourguide -->
-								<div class = "half" id = "right">
-									<h1 class = "biggie"><strong>Tour Guides</strong></h1>
-										
-										{{> ranking}}
-
-
-
-
-								</div>
+									<h1 class = "biggie"><strong>Thank You!</strong></h1>
+									<p>You will be contacted by phone if you have a match.</p>
 
 						</section>
 					</div>
@@ -86,15 +74,6 @@
 			<script src="assets/js/main.js"></script>
 			<script src="matches.js"></script>
 	</body>
-</template>
-
-<template name="ranking">
-	<ol>
-		
-		{{#each ids}}
-
-			<li class = "matched_guide_list">{{this}}</li>{{/each}}
-	</ol>
 </template>
 
 <!-- <template name="task">

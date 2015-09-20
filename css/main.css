@@ -107,6 +107,15 @@
 	.biggie {
 		font-size: 45px;
 	}
+	#noc{
+		position: absolute;
+		z-index: -5;
+		visibility: hidden;
+	}
+	#cme {
+		position: absolute;
+		z-index: -4;
+	}
 
 
 

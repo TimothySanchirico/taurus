@@ -62,7 +62,7 @@ function return_interests(){
 	var ints = guide_obj[0].guideInt;
 	var int_string = ''
 	for(var i = 0; i < ints.length; i++){
-		int_string += ints[i];
+		int_string = int_string + ints[i] + " ";
 	}
 	console.log(int_string);
 	return int_string;
