@@ -227,9 +227,10 @@ Template.output_map.onCreated(function(){
       out_map = map.instance;
       var id = Session.get('guides_id');
       console.log("ID: " + id);
-      var my_markers = guide_collection.find({_id: id}).fetch().markers;
+      var my_markers = guide_collection.find({_id: id}).fetch()[0].markers;
        console.log(guide_collection.find({_id: id}).fetch());
-       if(my_markers){
+       console.log(my_markers);
+       
         for(var i = 0; i < my_markers.length; i++){
         var marker = new google.maps.Marker({
               draggable: true,
@@ -237,7 +238,7 @@ Template.output_map.onCreated(function(){
               position: new google.maps.LatLng(my_markers[i].H, my_markers[i].L),
               map: map.instance
               });
-        }
+        
        }
     });
   });
