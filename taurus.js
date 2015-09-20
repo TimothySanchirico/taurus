@@ -14,6 +14,9 @@ Router.route('/map', {
 Router.route('/set_dest', {
   template: "destination_setter"
 });
+Router.route('/matches', {
+  template: "matches"
+});
 
 //setup mongoDBs
 tourist_collection = new Mongo.Collection("tourists");

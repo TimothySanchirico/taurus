@@ -62,10 +62,10 @@
 	#ours {
 		color: black;
 		padding: 3em;
-		background-color: rgba(200,235,255,0.6);
+		background-color: rgba(255,255,255,0.75);
 	}
 	#thisis {
-		background-color: rgba(255,255,255,0.85);
+		/*background-color: rgba(255,255,255,0.85);*/
 	}
 	#tgq {
 		text-align: center;
@@ -74,7 +74,7 @@
 		width: 80%;
 	}
 	.clr {
-		background-color: rgba(255,255,255,0.85);
+		/*background-color: rgba(255,255,255,0.85);*/
 
 	}
 
@@ -1815,7 +1815,7 @@
 		display: inline-block;
 		margin-bottom: 15px;
 		width: 80%;
-		background-color: rgba(255,255,255,0.85);
+		/*background-color: rgba(255,255,255,0.85);*/
 
 	}
 	.user_interest {
@@ -1823,7 +1823,7 @@
 		margin-left: auto;
 		margin-bottom: 15px;
 		width: 80%;
-		background-color: rgba(255,255,255,0.85);
+		/*background-color: rgba(255,255,255,0.85);*/
 	}
 	.submit_wrapper {
 		/*background-color: rgba(255,255,255,0.8);*/
@@ -1834,7 +1834,7 @@
 		margin-left: auto;
 		margin-bottom: 15px;
 		width: 80%;
-		background-color: rgba(255,255,255,0.85);
+		/*background-color: rgba(255,255,255,0.85);*/
 	}
 	#destination_add {
 		display: inline-block;
@@ -1842,7 +1842,7 @@
 		margin-bottom: 15px;
 		margin-left: auto;
 		margin-right: auto;
-		background-color: rgba(255,255,255,0.85);
+		/*background-color: rgba(255,255,255,0.85);*/
 	}
 	#destination_submit {
 		display: inline-block;
@@ -2251,11 +2251,28 @@
 			color: inherit;
 		}
 
-		.wrapper.style4 {
+		.wrapper.style7 {
 			background-image: url("http://streetwill.co/uploads/post/photo/216/show_oV7IKl3B7QLoPK42bprAXroMC_669VE9-c7EM4ONCvc.jpg");
 			color: inherit;
 			padding: 6em;
 		}
+		.wrapper.style4 {
+			background: #fff;
+			color: inherit;
+			padding: 6em;
+		}
+		.wrapper.style5 {
+			background-image: url("http://streetwill.co/uploads/post/photo/453/show_f7S8lbtYy37GTqmU2LAHJGGNrga8TytTZMzqwjYOSQE.jpg");
+			color: inherit;
+			padding: 6em;
+		}
+
+		.wrapper.style6 {
+			background-image: url("http://streetwill.co/uploads/post/photo/428/show_Fquhq0EuSgMkb2UrWzMm4KcF5DX-R1hGPHJ2h2rYigc.jpg");
+			color: inherit;
+			padding: 6em;
+		}
+
 
 /* Header */
 
