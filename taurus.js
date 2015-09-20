@@ -62,14 +62,22 @@ if (Meteor.isClient) {
       //@TODO: parse locations and interests into arrays of individual locations / interests
       var locations = event.target.guide_dest.value;
       var interests = event.target.guide_interest.value;
-      var guide_name = event.target.guide_first.value + ' ' + event.target.guide_last.value;
 
       //push these into the guide database
       //alert(locations + " " + interests);
       var guideLocArr = formatString(locations);
       var guideIntArr = formatString(interests);
       var guide_phone = event.target.guide_contact.value;
-      var insert_obj = {name:guide_name, guideLoc: guideLocArr, guideInt:guideIntArr, phone:guide_phone, createdAt:new Date()};
+      var insert_obj = {
+        name: {
+          first: event.target.guide_first.value,
+          last: event.target.guide_last.value
+        },
+        guideLoc: guideLocArr, 
+        guideInt: guideIntArr, 
+        phone:guide_phone, 
+        createdAt:new Date()
+      };
       console.log(insert_obj);
       guide_collection.insert(insert_obj, function(error){
           if(error){
