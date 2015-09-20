@@ -166,7 +166,7 @@ if (Meteor.isClient) {
 
 function formatString(str) {
   var delimited = str.split(/\,\s+|\s+|\,+/g);
-  for(int i=0; i<delimited.length; i++)
+  for(var i=0; i<delimited.length; i++)
     delimited[i] = delimited[i].toLowerCase();
   return delimited;
 }
