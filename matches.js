@@ -3,13 +3,10 @@ if (Meteor.isClient) {
   // This code only runs on the client
   Template.matches.helpers({
     tasks: function () {
-<<<<<<< HEAD
       return guide_collection.find({});
       touristScoreCalc(Session.get('this_session'));
-=======
       //return guide_collection.find({});
       rankGuides(Session.get('this_session'));
->>>>>>> origin/master
     }
   });
 }
