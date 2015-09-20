@@ -1,0 +1,97 @@
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<template name = "output">
+	<head>
+		<title>Map</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="/">TourUs <span>>_Crowdsourcing a smaller world</span></a></h1>
+					
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+					<div id = "mybg">
+
+
+						<header class="special container">
+						<h2>Here is the pen & paper. <strong>Go write the story</strong></h2>
+						<p>Recommendations and contact info for your tour guide!</p>
+					</header>
+
+					<!-- <header class="special container">
+						<h2>I see you're looking to travel! <strong>Where are you headed? :D</strong></h2>
+						<p>Let's write a new chapter together.</p>
+					</header> -->
+
+					<!-- One -->
+						<section class="wrapper style8 container">
+
+							<!-- Content -->
+								<div class="content" id = "ours">
+								
+									<section>
+										<h2 id = "nopad" class = "biggie"><strong>Contact your guide</strong></h2>
+										<p style = "text-align: center">write phonenumber here
+										</p>
+										
+										<h2 id = "nopad" class = "biggie"><strong>Your guide's recommendations</strong></h2>
+										<div id="map_container">
+											{{> googleMap name="destination_map" options=mapOptions}}
+										</div>
+										<div id = "submit_wrapper">
+											<input id = "donesies" type="button" value="Tip your tour guide">
+										</div>
+										
+									</section>
+								</div>
+
+						</section>
+					</div>
+				</article>
+
+
+
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script src = "js/map.js"></script>
+
+			// <script>
+		 //      function initialize() {
+		 //        var mapCanvas = document.getElementById('map');
+		 //        var mapOptions = {
+		 //          center: new google.maps.LatLng(44.5403, -78.5463),
+		 //          zoom: 8,
+		 //          mapTypeId: google.maps.MapTypeId.ROADMAP
+		 //        }
+		 //        var map = new google.maps.Map(mapCanvas, mapOptions)
+		 //      }
+		 //      google.maps.event.addDomListener(window, 'load', initialize);
+		 //    </script>
+
+	</body>
+</template>
