@@ -68,12 +68,12 @@ if (Meteor.isClient) {
       //@TODO: parse locations and interests into arrays of individual locations / interests
       var locations = event.target.guide_dest.value;
       var interests = event.target.guide_interest.value;
-
+      var phone = event.target.guide_contact.value;
       //push these into the guide database
       //alert(locations + " " + interests);
       var guideLocArr = formatString(locations);
       var guideIntArr = formatString(interests);
-      var guide_phone = event.target.guide_contact.value;
+      var guide_phone = formatPhone(phone);
       var insert_obj = {
         name: {
           first: event.target.guide_first.value,
@@ -243,6 +243,11 @@ function formatString(str) {
   for(var i=0; i<delimited.length; i++)
     delimited[i] = delimited[i].toLowerCase();
   return delimited;
+}
+
+function formatPhone(str) {
+  var formatted = str.replace(/\D/g, "");
+  return formatted;
 }
 
 if (Meteor.isServer) {
