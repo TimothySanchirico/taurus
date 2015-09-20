@@ -21,7 +21,8 @@ Router.route('/matches', {
 //setup mongoDBs
 tourist_collection = new Mongo.Collection("tourists");
 guide_collection = new Mongo.Collection("guides");
-
+Markers = new Mongo.Collection("map_markers");
+var dest_map;
 
 if (Meteor.isClient) {
   
@@ -35,7 +36,7 @@ if (Meteor.isClient) {
     });
   });
 
-  Markers = new Mongo.Collection("map_markers");
+  
 
   Template.tourguideSignUp.events({
     'submit .guide_form': function (event) {
@@ -112,12 +113,27 @@ if (Meteor.isClient) {
   Template.destination_map.rendered = function() {
     this.autorun(function() {
       if(GoogleMaps.loaded()) {
-        $('#destination_add').geocomplete();
+        $('#destination_add')
+          .geocomplete()
+          .bind("geocode:result", function(event, result){
+            lat = result.geometry.location.H;
+            lng = result.geometry.location.L;
+            //THIS IS THE MARKER THAT NEEDS TO GO IN MARKERS DB
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(lat, lng),
+              map: dest_map,
+              title: "Destinationz"
+            })
+            $('#destination_add').val('');
+          });
       }
     });
-  }
+
+      
+  };
   Template.destination_map.onCreated(function(){
     GoogleMaps.ready('destination_map', function(map) {
+      dest_map = map.instance;
       google.maps.event.addListener(map.instance, 'click', function(event) {
         Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
       });
@@ -139,6 +155,12 @@ if (Meteor.isClient) {
       });
     });
   });
+
+  // Template.destination_map.events({
+  //   'submit .dest_add_form': function(event){
+
+  //   }
+  // });
 }
 
 
