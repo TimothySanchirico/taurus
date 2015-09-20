@@ -34,9 +34,14 @@ if (Meteor.isClient) {
     guide_collection.allow({
     'insert':function(){
       return true;
-    }
-    
+    } 
   });
+    tourist_collection.allow({
+      'insert':function()
+      {
+        return true;
+      }
+    });
     GoogleMaps.load({
       key: 'AIzaSyAHtGRa7hABkvM7povLtOTXgxyantNO7-o',
       libraries: 'places'
@@ -104,7 +109,7 @@ if (Meteor.isClient) {
       event.target.tourist_last.value = "";
       event.target.tourist_dest.value = "";
       event.target.tourist_interest.value = "";
-      Route.go('matches');
+      Router.go('matches');
     }
   });
 
@@ -215,5 +220,13 @@ if (Meteor.isServer) {
     }
     
   });
+
+        tourist_collection.allow({
+      'insert':function()
+      {
+        return true;
+      }
+    });
+
   });
 }
