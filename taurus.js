@@ -26,7 +26,10 @@ if (Meteor.isClient) {
   Meteor.subscribe('guides');
 
   Meteor.startup(function(){
-    GoogleMaps.load();
+    GoogleMaps.load({
+      key: 'AIzaSyAHtGRa7hABkvM7povLtOTXgxyantNO7-o',
+      libraries: 'places'
+    });
   });
 
   Markers = new Mongo.Collection("map_markers");
@@ -103,6 +106,13 @@ if (Meteor.isClient) {
       }
     }
   });
+  Template.destination_map.rendered = function() {
+    this.autorun(function() {
+      if(GoogleMaps.loaded()) {
+        $('#destination_add').geocomplete();
+      }
+    });
+  }
   Template.destination_map.onCreated(function(){
     GoogleMaps.ready('destination_map', function(map) {
       google.maps.event.addListener(map.instance, 'click', function(event) {
