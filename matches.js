@@ -22,6 +22,8 @@ if (Meteor.isClient) {
   Template.ranking.events({
   	'click .matched_guide_list': function(e){
   		guides_id = e.toElement.outerText;
+  		console.log("GUIDES ID LEAVING MATCHES")
+  		console.log(guides_id);
   		Session.set('guides_id', guides_id);
   		Router.go('/choose');
   		

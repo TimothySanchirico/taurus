@@ -20,7 +20,7 @@ Router.route('/matches', {
   template: "matches"
 });
 Router.route('/output', {
-  template: "output"
+  template: "output_map"
 });
 Router.route('/choose', {
   template: "choose"
@@ -32,6 +32,7 @@ Router.route('/choose', {
 
     var dest_map;
     var marker_array = [];
+    var out_map;
 if (Meteor.isClient) {
   
   Meteor.startup(function(){
@@ -144,7 +145,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.output.helpers({
+  Template.output_map.helpers({
     mapOptions: function(){
       if (GoogleMaps.loaded()) {
         return {
@@ -154,7 +155,7 @@ if (Meteor.isClient) {
         };
       }
     }
-  })
+  });
 
   Template.destination_map.helpers({
     mapOptions: function(){
@@ -178,8 +179,7 @@ if (Meteor.isClient) {
             latLng = new google.maps.LatLng(lat, lng);
             marker_array.push(latLng);
             //THIS IS THE MARKER THAT NEEDS TO GO IN MARKERS DB
-            tour_guide_name = Session.get('guide_name');
-            console.log(tour_guide_name);
+            
             var marker = new google.maps.Marker({
               position: latLng,
               map: dest_map,
@@ -198,6 +198,50 @@ if (Meteor.isClient) {
       }
     });   
   };
+
+  Template.output_map.rendered = function() {
+    this.autorun(function() {
+      if(GoogleMaps.loaded()){
+        var id = Session.get('guides_id');
+        console.log(id);
+        var guide_obj = guide_collection.find({_id: id}).fetch();
+        var my_markers = guide_obj[0].markers;
+        console.log(my_markers);
+
+        for(var i = 0; i < my_markers.length; i++){
+          console.log(my_markers[i].H);
+          var marker = new google.maps.Marker({
+              draggable: false,
+              animation: google.maps.Animation.DROP,
+              position: new google.maps.LatLng(my_markers[i].H, my_markers[i].L),
+              map: out_map
+              });
+        }
+      }
+    });
+  };
+
+
+Template.output_map.onCreated(function(){
+    GoogleMaps.ready('output_map', function(map) {
+      out_map = map.instance;
+      var id = Session.get('guides_id');
+      console.log("ID: " + id);
+      var my_markers = guide_collection.find({_id: id}).fetch().markers;
+       console.log(guide_collection.find({_id: id}).fetch());
+       if(my_markers){
+        for(var i = 0; i < my_markers.length; i++){
+        var marker = new google.maps.Marker({
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              position: new google.maps.LatLng(my_markers[i].H, my_markers[i].L),
+              map: map.instance
+              });
+        }
+       }
+    });
+  });
+
   Template.destination_map.events({
     'click .add_to_map': function (event) {
       event.preventDefault();
@@ -219,6 +263,7 @@ if (Meteor.isClient) {
     }
 
   });
+
 
   Template.destination_map.onCreated(function(){
     GoogleMaps.ready('destination_map', function(map) {

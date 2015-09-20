@@ -1,6 +1,15 @@
 <template name = "choose">
 	<head>
 		<title>Following Along</title>
+		<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script src="choose.js"></script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -29,11 +38,17 @@
 							<div class = "content" id = "ours">
 							<!-- Tourists -->
 								<h1 class = "biggie"><strong>Your Tour Guide's Name</strong></h1>
-								<p>name goes here</p>
+								{{#each tasks}}
+									{{> task}}
+								{{/each}}
 								<h1 class = "biggie"><strong>Phone #</strong></h1>
-								<p># goes here</p>
+								{{#each phones}}
+									{{> phone}}
+								{{/each}}
 								<h1 class = "biggie"><strong>Interests</strong></h1>
-								<p>interests go here</p>
+								{{#each interests}}
+									{{> interest}}
+								{{/each}}
 								<div id = "submit_wrapper">
 											<input id = "donesies" class="to_output" type="button" value="Choose this guide">
 										</div>
@@ -47,14 +62,15 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollgress.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-			<script src="choose.js"></script>
+			
 	</body>
 </template>
+<template name = "task">
+	{{text}}
+	</template>
+<template name = "phone">
+	{{text}}
+	</template>
+<template name = "interest">
+	{{text}}
+	</template>

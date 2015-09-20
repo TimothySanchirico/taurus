@@ -1,15 +1,71 @@
 
 if (Meteor.isClient) {
   // This code only runs on the client
-  Template.ranking.helpers({
-    rankings: function () {
-      return formatting(rankGuides(Session.get('this_session')));
+  // Template.ranking.helpers({
+  //   rankings: function () {
+  //     return formatting(rankGuides(Session.get('this_session')));
 
-      // guide_collection.find({_id: rankGuides[0][0]}).fetch()[0].name.first;
+  //     // guide_collection.find({_id: rankGuides[0][0]}).fetch()[0].name.first;
 
-      //return guide_collection.find({});
-    }
+  //     //return guide_collection.find({});
+  //   }
+  // });
+
+Template.choose.helpers({
+	tasks: [
+		 {text: return_name}
+	],
+	phones: [
+		{text: return_phone}
+	],
+	interests: [
+		{text:return_interests}
+	]
+});
+
+  Template.choose.onCreated(function(){
+  	var id = Session.get('guides_id');
+  	var guide_obj = guide_collection.find({_id: id}).fetch();
+  	var name = guide_obj[0].name.first + ' ' + guide_obj[0].name.last;
+  	$("#chosen_guide_name").val(name);
   });
+  Template.choose.rendered = function(){
+  	this.autorun(function() {
+  		var id = Session.get('guides_id');
+	  	var guide_obj = guide_collection.find({_id: id}).fetch();
+	  	
+	  	var name = guide_obj[0].name.first + ' ' + guide_obj[0].name.last;
+	  	
+	  	$("#chosen_guide_name").val(name);
+	  });
+  };
+}
+
+function return_name(){
+	var id = Session.get('guides_id');
+	  	var guide_obj = guide_collection.find({_id: id}).fetch();
+	  	
+	  	var name = guide_obj[0].name.first + ' ' + guide_obj[0].name.last;
+	  	return name;
+}
+function return_phone(){
+	var id = Session.get('guides_id');
+	  	var guide_obj = guide_collection.find({_id: id}).fetch();
+	  	
+	  	var phone = guide_obj[0].phone;
+	  	return phone;
+}
+function return_interests(){
+	var id = Session.get('guides_id');
+	var guide_obj = guide_collection.find({_id: id}).fetch();
+	console.log(guide_obj);
+	var ints = guide_obj[0].guideInt;
+	var int_string = ''
+	for(var i = 0; i < ints.length; i++){
+		int_string += ints[i];
+	}
+	console.log(int_string);
+	return int_string;
 }
 
 function formatting(arr ) {
