@@ -61,9 +61,10 @@
 								</div>
 							<!-- Tourguide -->
 								<div class = "half" id = "right">
+									<h1>hi</h1>
 									<ul>
-								      {{#each cards}}
-								        {{> card}}
+								      {{#each tasks}}
+									        {{> task}}
 								      {{/each}}
 								    </ul>
 								</div>
@@ -87,20 +88,10 @@
 			<script src="assets/js/main.js"></script>
 			<script src="matches.js"></script>
 	</body>
-
 </template>
 
-<template name = "card">
-	<li>
-		<div id = "crd">
-			{{propic}}
-			{{name}}
-			{{availibity}}
-			{{score}}
-		</div>
-	</li>
-
-
+<template name="task">
+  <li><a href = "#">{{text}}</a></li>
 </template>
 
 
