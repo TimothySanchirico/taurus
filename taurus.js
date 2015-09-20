@@ -24,6 +24,8 @@ Router.route('/matches', {
     guide_collection = new Mongo.Collection('guides');
     Markers = new Mongo.Collection("map_markers");
 
+    var dest_map;
+    var marker_array = [];
 if (Meteor.isClient) {
   
   Meteor.startup(function(){
@@ -51,6 +53,7 @@ if (Meteor.isClient) {
       key: 'AIzaSyAHtGRa7hABkvM7povLtOTXgxyantNO7-o',
       libraries: 'places'
     });
+    
   });
 
   
@@ -149,49 +152,77 @@ if (Meteor.isClient) {
           .bind("geocode:result", function(event, result){
             lat = result.geometry.location.H;
             lng = result.geometry.location.L;
+            latLng = new google.maps.LatLng(lat, lng);
+            marker_array.push(latLng);
             //THIS IS THE MARKER THAT NEEDS TO GO IN MARKERS DB
             tour_guide_name = Session.get('guide_name');
             console.log(tour_guide_name);
             var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(lat, lng),
+              position: latLng,
               map: dest_map,
               title: "Destinationz"
             });
-            Marker.insert(marker, function(error){
-              if(error){
-                console.log(error);
-              }
-              else {
-                console.log("Markers insert success");
-              }
-            });
+            // Markers.insert(marker, function(error){
+            //   if(error){
+            //     console.log(error);
+            //   }
+            //   else {
+            //     console.log("Markers insert success");
+            //   }
+            // });
             $('#destination_add').val('');
           });
       }
-    });
-
-      
+    });   
   };
+  Template.destination_map.events({
+    'click .add_to_map': function (event) {
+      event.preventDefault();
+      Markers.insert(marker_array, function(error){
+        if(error){
+          console.log(error);
+        }
+        else {
+          console.log("Marker collection insert success");
+        }
+      });
+    }
+
+  });
+
   Template.destination_map.onCreated(function(){
     GoogleMaps.ready('destination_map', function(map) {
       dest_map = map.instance;
-      google.maps.event.addListener(map.instance, 'click', function(event) {
-        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-      });
+      // google.maps.event.addListener(map.instance, 'click', function(event) {
+      //   Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+      // });
       var markers = {};
 
       Markers.find().observe({  
         added: function(document) {
           // Create a marker for this document
-          var marker = new google.maps.Marker({
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            position: new google.maps.LatLng(document.lat, document.lng),
-            map: map.instance,
-            // We store the document _id on the marker in order 
-            // to update the document within the 'dragend' event below.
-            id: document._id
-          });
+          console.log("Marker helper add call");
+          console.log(document[0]);
+          console.log(document[0].H);
+          if(document[0].length > 0){
+            for(var i =0; i < document.length; i++){
+              var marker = new google.maps.Marker({
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              position: new google.maps.LatLng(document[0][i].H, document[0][i].L),
+              map: map.instance
+              });
+            
+            }
+          }
+          else if(document[0].H){
+            var marker = new google.maps.Marker({
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              position: new google.maps.LatLng(document[0].H, document[0].L),
+              map: map.instance
+              });
+          }
         }
       });
     });
