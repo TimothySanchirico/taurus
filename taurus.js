@@ -41,11 +41,6 @@ if (Meteor.isClient) {
   Template.tourguideSignUp.events({
     'submit .guide_form': function (event) {
       event.preventDefault();
-      
-
-      //grab the form data
-      var name = event.target.guide_first.value + ' ' + event.target.guide_last.value;
-      tour_guide_name = name;
 
       //@TODO: parse locations and interests into arrays of individual locations / interests
       var locations = event.target.guide_dest.value;
@@ -53,21 +48,24 @@ if (Meteor.isClient) {
 
       //push these into the guide database
       //alert(locations + " " + interests);
-      var touristguide_locations_array = locations.split(",");
-      var touristguide_interests_array = interests.split(",");
+      var guideLocArr = formatString(locations);
+      var guideIntArr = formatString(interests);
+
       guide_collection.insert({
-          name: { first: event.target.guide_first.value, last: event.target.guide_last.value },
-          touristguide_locations: touristguide_locations_array,
-          touristguide_interests_array: touristguide_interests_array,
+          name: { 
+            first: event.target.guide_first.value, 
+            last: event.target.guide_last.value
+          },
+          guideLoc: guideLocArr,
+          guideInt: guideIntArr,
           createdAt: new Date()
         });
 
+      Session.set('this session', this._id);
       event.target.guide_first.value = "";
       event.target.guide_last.value = "";
       event.target.guide_dest.value = "";
       event.target.guide_interest.value = "";
-      Session.set('guide_name', name);
-
     }
   });
 
@@ -75,29 +73,28 @@ if (Meteor.isClient) {
     'submit .tourist_form': function (event) {
       event.preventDefault();
 
-      //grab the form data
-      var name = event.target.tourist_first.value + ' ' + event.target.tourist_last.value;
-
       //@TODO parse locations and interests into arrays of individual locations / interests
       var locations = event.target.tourist_dest.value;
       var interests = event.target.tourist_interest.value;
-      var tourist_locations_array = locations.split(",");
-      var tourist_interests_array = interests.split(",");
+      
+      var touristLocArr = formatString(locations);
+      var touristIntArr = formatString(interests);
       //push these into the tourist database
       tourist_collection.insert({
-          name: { first: event.target.tourist_first.value, last: event.target.tourist_last.value },
-          tourist_locations: tourist_locations_array,
-          tourist_interests_array: tourist_interests_array,
+          name: { 
+            first: event.target.tourist_first.value, 
+            last: event.target.tourist_last.value 
+          },
+          touristLoc: touristLocArr,
+          touristInt: touristIntArr,
           createdAt: new Date()
         });
 
+      Session.set('this session', this._id);
       event.target.tourist_first.value = "";
       event.target.tourist_last.value = "";
       event.target.tourist_dest.value = "";
       event.target.tourist_interest.value = "";
-
-      Session.set('tourist_name', name);
-
     }
   });
 
@@ -167,6 +164,23 @@ if (Meteor.isClient) {
   // });
 }
 
+function formatString(str) {
+  var delimited = str.split(/\,\s+|\s+|\,+/g);
+  for(int i=0; i<delimited.length; i++)
+    delimited[i] = delimited[i].toLowerCase();
+  return delimited;
+}
+
+function tourGuideScoreCalc(sessionval) {
+  var touristCursor = tourist_collection.find({});
+  var tourist;
+  var guide = guide_collection.find({_id: sessionval}).fetch();
+  var orderedOutput = new Array(0);
+  while(touristCursor.hasNext()) {
+    tourist = touristCursor.next().fetch();
+
+  }
+}
 
 if (Meteor.isServer) {
   //@TODO need to set up publishing ie turn off autopublish
