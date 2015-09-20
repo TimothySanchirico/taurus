@@ -37,10 +37,11 @@
 
 							<!-- Content -->
 								<div class="content">
-								<input type="text" name = "auto_dest" id = "destination_add" placeholder = "Add an interest point!">
-								<input type="submit" value = "Add Destination" id = "destination_submit">
+								
 									<section>
 										<h2 id = "nopad">Destinations</h2>
+										<input type="text" name = "auto_dest" id = "destination_add" placeholder = "Add an interest point!">
+										<input type="submit" value = "Add Destination" id = "destination_submit">
 										<div id="map_container">
 											{{> googleMap name="destination_map" options=mapOptions}}
 										</div>

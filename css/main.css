@@ -1838,7 +1838,7 @@
 	}
 	#destination_add {
 		display: inline-block;
-		width:50%;
+		width:49%;
 		margin-bottom: 15px;
 		margin-left: auto;
 		margin-right: auto;
@@ -1846,7 +1846,7 @@
 	}
 	#destination_submit {
 		display: inline-block;
-		width:40%;
+		width:49%;
 
 	}
 
