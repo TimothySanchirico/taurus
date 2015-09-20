@@ -246,8 +246,9 @@ function formatString(str) {
 }
 
 function formatPhone(str) {
-  var formatted = str.replace(/\D/g, "");
-  return formatted;
+  var stripped = str.replace(/\D/g, "");
+  var formatted = stripped.match(/^(\d{3})(\d{3})(\d{4})$/);
+  return (!formatted) ? null : "(" + m[1] + ") " + m[2] + "-" + m[3];
 }
 
 if (Meteor.isServer) {
