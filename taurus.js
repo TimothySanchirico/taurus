@@ -1,4 +1,6 @@
 //Set up routes to the different pages
+
+
 Router.route('/', {
   template: 'landingPage'
 });
@@ -18,18 +20,23 @@ Router.route('/matches', {
   template: "matches"
 });
 
-//setup mongoDBs
-tourist_collection = new Mongo.Collection("tourists");
-guide_collection = new Mongo.Collection("guides");
-Markers = new Mongo.Collection("map_markers");
-var dest_map;
+    tourist_collection = new Mongo.Collection("tourists");
+    guide_collection = new Mongo.Collection('guides');
+    Markers = new Mongo.Collection("map_markers");
 
 if (Meteor.isClient) {
   
-  Meteor.subscribe('tourists');
-  Meteor.subscribe('guides');
+  
 
   Meteor.startup(function(){
+    Meteor.subscribe('tourists');
+    Meteor.subscribe('guides');
+    guide_collection.allow({
+    'insert':function(){
+      return true;
+    }
+    
+  });
     GoogleMaps.load({
       key: 'AIzaSyAHtGRa7hABkvM7povLtOTXgxyantNO7-o',
       libraries: 'places'
@@ -45,27 +52,29 @@ if (Meteor.isClient) {
       //@TODO: parse locations and interests into arrays of individual locations / interests
       var locations = event.target.guide_dest.value;
       var interests = event.target.guide_interest.value;
+      var guide_name = event.target.guide_first.value + ' ' + event.target.guide_last.value;
 
       //push these into the guide database
       //alert(locations + " " + interests);
       var guideLocArr = formatString(locations);
       var guideIntArr = formatString(interests);
-
-      guide_collection.insert({
-          name: { 
-            first: event.target.guide_first.value, 
-            last: event.target.guide_last.value
-          },
-          guideLoc: guideLocArr,
-          guideInt: guideIntArr,
-          createdAt: new Date()
+      var insert_obj = {name:guide_name, guideLoc: guideLocArr, guideInt:guideIntArr, createdAt:new Date()};
+      console.log(insert_obj);
+      guide_collection.insert(insert_obj, function(error){
+          if(error){
+            console.log(error);
+          }
+          else {
+            console.log("insert success");
+          }
         });
-
-      Session.set('this session', this._id);
+      var id = Meteor.default_connection._lastSessionId;
+      Session.set('this_session', id);
       event.target.guide_first.value = "";
       event.target.guide_last.value = "";
       event.target.guide_dest.value = "";
       event.target.guide_interest.value = "";
+      Router.go('map')
     }
   });
 
@@ -95,6 +104,7 @@ if (Meteor.isClient) {
       event.target.tourist_last.value = "";
       event.target.tourist_dest.value = "";
       event.target.tourist_interest.value = "";
+      Route.go('matches');
     }
   });
 
@@ -184,10 +194,26 @@ function tourGuideScoreCalc(sessionval) {
 
 if (Meteor.isServer) {
   //@TODO need to set up publishing ie turn off autopublish
-  Meteor.publish('tourists');
-  Meteor.publish('guides');
+  
+  
 
   Meteor.startup(function () {
     // code to run on server at startup
+    //setup mongoDBs
+    
+
+    
+    Meteor.publish('tourists', function () {
+      return tourist_collection.find(); // everything
+    });
+    Meteor.publish('guides', function() {
+      return guide_collection.find();
+    });
+    guide_collection.allow({
+    'insert':function(){
+      return true;
+    }
+    
+  });
   });
 }
