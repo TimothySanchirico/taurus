@@ -136,6 +136,18 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.output.helpers({
+    mapOptions: function(){
+      if (GoogleMaps.loaded()) {
+        return {
+          center: new google.maps.LatLng(38.6272, -90.1978),
+          zoom: 8,
+          disableDefaultUI:true
+        };
+      }
+    }
+  })
+
   Template.destination_map.helpers({
     mapOptions: function(){
       if (GoogleMaps.loaded()) {
