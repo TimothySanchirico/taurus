@@ -85,11 +85,10 @@
 
 <template name="ranking">
 	<ol>
-		{{#each potato}}
-<a  href = {{this}}>
-{{/each}}
-		{{#each rankings}}
-			<li>{{this}}</li> </a>{{/each}}
+		
+		{{#each ids}}
+
+			<li class = "matched_guide_list">{{this}}</li>{{/each}}
 	</ol>
 </template>
 

@@ -4,7 +4,28 @@ if (Meteor.isClient) {
   Template.ranking.helpers({
     'rankings': function () {
 	    return formatter(rankGuides(Session.get('this_session')));
+    },
+    'ids':function() {
+    	id_array = [];
+    	id_ranks =rankGuides(Session.get('this_session'))
+    	for(var i = 0; i < id_ranks.length; i++){
+    		console.log("ID:");
+    		console.log(id_ranks[i][0]);
+    		id_array.push(id_ranks[i][0]);
+    	}
+    	return id_array;
     }
+
+    
+  });
+
+  Template.ranking.events({
+  	'click .matched_guide_list': function(e){
+  		guides_id = e.toElement.outerText;
+  		Session.set('guides_id', guides_id);
+  		Router.go('/choose');
+  		
+  	}
   });
 }
 
