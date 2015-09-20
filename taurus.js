@@ -26,8 +26,6 @@ Router.route('/matches', {
 
 if (Meteor.isClient) {
   
-  
-
   Meteor.startup(function(){
     Meteor.subscribe('tourists');
     Meteor.subscribe('guides');
@@ -83,6 +81,7 @@ if (Meteor.isClient) {
         });
       var id = Meteor.default_connection._lastSessionId;
       Session.set('this_session', id);
+      Session.set('type', "guide");
       event.target.guide_first.value = "";
       event.target.guide_last.value = "";
       event.target.guide_dest.value = "";
@@ -112,7 +111,9 @@ if (Meteor.isClient) {
           createdAt: new Date()
         });
 
-      Session.set('this session', this._id);
+      var id = Meteor.default_connection._lastSessionId;
+      Session.set('this_session', id);
+      Session.set('type', "tourist");
       event.target.tourist_first.value = "";
       event.target.tourist_last.value = "";
       event.target.tourist_dest.value = "";
@@ -200,17 +201,6 @@ function formatString(str) {
   for(var i=0; i<delimited.length; i++)
     delimited[i] = delimited[i].toLowerCase();
   return delimited;
-}
-
-function tourGuideScoreCalc(sessionval) {
-  var touristCursor = tourist_collection.find({});
-  var tourist;
-  var guide = guide_collection.find({_id: sessionval}).fetch();
-  var orderedOutput = new Array(0);
-  while(touristCursor.hasNext()) {
-    tourist = touristCursor.next().fetch();
-
-  }
 }
 
 if (Meteor.isServer) {
