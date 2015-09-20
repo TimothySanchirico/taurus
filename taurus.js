@@ -193,14 +193,21 @@ if (Meteor.isClient) {
   Template.destination_map.events({
     'click .add_to_map': function (event) {
       event.preventDefault();
-      Markers.insert(marker_array, function(error){
-        if(error){
-          console.log(error);
-        }
-        else {
-          console.log("Marker collection insert success");
-        }
-      });
+      //use this_session to find right tour guide
+      var id = Session.get("this_session");
+      console.log("GRABBED DOC");
+      console.log(guide_collection.find({_id: id}).fetch());
+      //^get retrusnt the document with the id
+      guide_collection.update({_id: id}, {$set :{markers: marker_array} }, {upsert: false, multi:false});
+
+      // Markers.insert(marker_array, function(error){
+      //   if(error){
+      //     console.log(error);
+      //   }
+      //   else {
+      //     console.log("Marker collection insert success");
+      //   }
+      // });
     }
 
   });
@@ -212,34 +219,49 @@ if (Meteor.isClient) {
       //   Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
       // });
       var markers = {};
-
-      Markers.find().observe({  
-        added: function(document) {
-          // Create a marker for this document
-          console.log("Marker helper add call");
-          console.log(document[0]);
-          console.log(document[0].H);
-          if(document[0].length > 0){
-            for(var i =0; i < document.length; i++){
-              var marker = new google.maps.Marker({
+      var id = Session.get('this_session');
+      console.log("ID: " + id);
+      var my_markers = guide_collection.find({_id: id}).fetch().markers;
+       console.log(guide_collection.find({_id: id}).fetch());
+       if(my_markers){
+        for(var i = 0; i < my_markers.length; i++){
+        var marker = new google.maps.Marker({
               draggable: true,
               animation: google.maps.Animation.DROP,
-              position: new google.maps.LatLng(document[0][i].H, document[0][i].L),
+              position: new google.maps.LatLng(my_markers[i].H, my_markers[i].L),
               map: map.instance
               });
-            
-            }
-          }
-          else if(document[0].H){
-            var marker = new google.maps.Marker({
-              draggable: true,
-              animation: google.maps.Animation.DROP,
-              position: new google.maps.LatLng(document[0].H, document[0].L),
-              map: map.instance
-              });
-          }
         }
-      });
+       }
+      
+
+      // Markers.find().observe({  
+      //   added: function(document) {
+      //     // Create a marker for this document
+      //     console.log("Marker helper add call");
+      //     console.log(document[0]);
+      //     console.log(document[0].H);
+      //     if(document[0].length > 0){
+      //       for(var i =0; i < document.length; i++){
+      //         var marker = new google.maps.Marker({
+      //         draggable: true,
+      //         animation: google.maps.Animation.DROP,
+      //         position: new google.maps.LatLng(document[0][i].H, document[0][i].L),
+      //         map: map.instance
+      //         });
+            
+      //       }
+      //     }
+      //     else if(document[0].H){
+      //       var marker = new google.maps.Marker({
+      //         draggable: true,
+      //         animation: google.maps.Animation.DROP,
+      //         position: new google.maps.LatLng(document[0].H, document[0].L),
+      //         map: map.instance
+      //         });
+      //     }
+      //   }
+      // });
     });
   });
 
@@ -286,6 +308,9 @@ if (Meteor.isServer) {
 
     guide_collection.allow({
       'insert':function(){
+        return true;
+      },
+      'update':function(){
         return true;
       }
     
