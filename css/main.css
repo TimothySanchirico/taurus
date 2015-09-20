@@ -67,7 +67,16 @@
 	#thisis {
 		background-color: rgba(255,255,255,0.85);
 	}
+	#tgq {
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		width: 80%;
+	}
+	.clr {
+		background-color: rgba(255,255,255,0.85);
 
+	}
 
 
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -1797,21 +1806,31 @@
 		outline: 0;
 	}
 	.user_name {
+		margin-right: auto;
+		margin-left: auto;
 		display: inline-block;
 		margin-bottom: 15px;
-		width: 45%;
+		width: 80%;
+		background-color: rgba(255,255,255,0.85);
 
 	}
 	.user_interest {
+		margin-right: auto;
+		margin-left: auto;
 		margin-bottom: 15px;
-		width: 100%;
+		width: 80%;
+		background-color: rgba(255,255,255,0.85);
 	}
 	.submit_wrapper {
+		/*background-color: rgba(255,255,255,0.8);*/
 		text-align: center;
 	}
 	.destinations {
+		margin-right: auto;
+		margin-left: auto;
 		margin-bottom: 15px;
-		width: 100%;
+		width: 80%;
+		background-color: rgba(255,255,255,0.85);
 	}
 	#destination_add {
 		width:80%;
@@ -2150,12 +2169,12 @@
 		input[type="button"].special,
 		input[type="submit"].special,
 		input[type="reset"].special,
-		.button.special {
+		/*.button.special {
 			background:  #f5a056;
 			border-color:  #f5a056;
 			box-shadow: 2px 2px 4px  rgba(0, 0, 0, 0.30);
 			color: #fff !important;
-		}
+		}*/
 
 			input[type="button"].special:hover,
 			input[type="submit"].special:hover,
